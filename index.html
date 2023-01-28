@@ -1,0 +1,133 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js"></script>
+
+
+
+</head>
+<body>
+    
+  <script type="module">
+
+    // Import the functions you need from the SDKs you need
+  
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+  
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-analytics.js";
+  
+    // TODO: Add SDKs for Firebase products that you want to use
+  
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+  
+    // Your web app's Firebase configuration
+  
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  
+    const firebaseConfig = {
+  
+      apiKey: "AIzaSyDEAFjJ3dXbY_GWsEa7JZ6oObm7hp77ZC0",
+  
+      authDomain: "freecipe-9f1c6.firebaseapp.com",
+  
+      projectId: "freecipe-9f1c6",
+  
+      storageBucket: "freecipe-9f1c6.appspot.com",
+  
+      messagingSenderId: "735626244895",
+  
+      appId: "1:735626244895:web:684daee18d75c9ba22762a",
+  
+      measurementId: "G-9WZ0RBTJCH"
+  
+    };
+  
+  
+    // Initialize Firebase
+  
+    const app = initializeApp(firebaseConfig);
+  
+    const analytics = getAnalytics(app);
+  
+  </script>
+<nav>
+  <ul>
+    <li><a href="#all-brewing-recipes">All Brewing Recipes</a></li>
+    <li><a href="#add-new-recipe">Add New Recipe</a></li>
+    <li><a href="#top-5-recipes">Top 5 Recipes</a></li>
+    <li><a href="#mead-recipes">Mead Recipes</a></li>
+    <li><a href="#wine-recipes">Wine Recipes</a></li>
+    <li><a href="#glogg-recipes">Glögg Recipes</a></li>
+  </ul>
+</nav>
+
+
+
+<div class="new-recipe-box">
+  <h2>Log New Recipe</h2>
+  <form>
+    <label for="brew-name">Name of Brew:</label>
+    <input type="text" id="brew-name" name="brew-name"><br>
+    
+    <label for="og">Original Gravity:</label>
+    <input type="text" id="og" name="og"><br>
+    
+    <label for="fg">Final Gravity:</label>
+    <input type="text" id="fg" name="fg"><br>
+    
+    <label for="abv">ABV:</label>
+    <input type="text" id="abv" name="abv"><br>
+    
+    <label for="ibu">IBU:</label>
+    <input type="text" id="ibu" name="ibu"><br>
+    
+  
+    <label for="malt-variety">Malt Variety:</label>
+<select id="malt-variety" name="malt-variety">
+  <option value="pilsner">Pilsner</option>
+  <option value="vienna">Vienna</option>
+  <option value="munich">Munich</option>
+  <option value="crystal">Crystal</option>
+  <option value="chocolate">Chocolate</option>
+</select><br>
+
+<label for="malt-weight">Malt Weight:</label>
+<input type="text" id="malt-weight" name="malt-weight"><br>
+<button type="button" id="add-malt-button">Add Malt</button>
+    <div id="malt-list">
+  <h3>Malt List</h3>
+  <ul id="malt-items"></ul>
+</div>
+
+
+    
+    <label for="hop-variety">Hop Variety:</label>
+    <select id="hop-variety" name="hop-variety">
+      <option value="cascade">Cascade</option>
+      <option value="centennial">Centennial</option>
+      <option value="amarillo">Amarillo</option>
+      <option value="simcoe">Simcoe</option>
+      <option value="nugget">Nugget</option>
+    </select><br>
+
+    <label for="hop-weight">Hop Weight:</label>
+    <input type="text" id="hop-weight" name="hop-weight"><br>
+   
+        <label for="alpha-acid">Alpha Acid:</label>
+    <input type="text" id="alpha-acid" name="alpha-acid" placeholder="% AA"><br>
+    <button type="button" id="add-hop-button">Add Hop</button>
+    <div id="hop-list"></div>
+    <button id="add-recipe-button" type="submit">Add Recipe</button>
+  </form>
+</div>
+
+
+
+</body>
+</html>

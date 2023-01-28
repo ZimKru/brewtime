@@ -1,0 +1,65 @@
+
+
+    HTML CSS JS 
+
+    Result
+    Skip Results Iframe
+
+nav {
+  background-color: #f2f2f2;
+  width: 150px; /* adjust as desired */
+  float: left;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  width: 100%; /* full width of the container */
+}
+
+nav a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #ddd;
+}
+
+
+
+.new-recipe-box {
+  width: 50%; /* adjust as desired */
+  margin: 0 auto; /* centers the box horizontally */
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+}
+
+.new-recipe-box h2 {
+  text-align: center;
+}
+
+.new-recipe-box form {
+  width: 50%; /* adjust as desired */
+  margin: 0 auto; /* centers the form horizontally */
+  padding: 20px;
+}
+
+.new-recipe-box label,
+.new-recipe-box input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+

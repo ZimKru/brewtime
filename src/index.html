@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FREEEEECIPE</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.16.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.16.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.16.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#all-brewing-recipes">All Brewing Recipes</a></li>
+        <li><a href="#add-new-recipe">Add New Recipe</a></li>
+        <li><a href="#top-5-recipes">Top 5 Recipes</a></li>
+        <li><a href="#mead-recipes">Mead Recipes</a></li>
+        <li><a href="#wine-recipes">Wine Recipes</a></li>
+        <li><a href="#glogg-recipes">Glögg Recipes</a></li>
+      </ul>
+    </nav>
+    
+    
+    
+    <div class="new-recipe-box">
+      <h2>Log New Recipe</h2>
+      <form>
+        <label for="brew-name">Name of Brew:</label>
+        <input type="text" id="brew-name" name="brew-name"><br>
+        
+        <label for="og">Original Gravity:</label>
+        <input type="text" id="og" name="og"><br>
+        
+        <label for="fg">Final Gravity:</label>
+        <input type="text" id="fg" name="fg"><br>
+        
+        <label for="abv">ABV:</label>
+        <input type="text" id="abv" name="abv"><br>
+        
+        <label for="ibu">IBU:</label>
+        <input type="text" id="ibu" name="ibu"><br>
+        
+      
+        <label for="malt-variety">Malt Variety:</label>
+    <select id="malt-variety" name="malt-variety">
+      <option value="pilsner">Pilsner</option>
+      <option value="vienna">Vienna</option>
+      <option value="munich">Munich</option>
+      <option value="crystal">Crystal</option>
+      <option value="chocolate">Chocolate</option>
+    </select><br>
+    
+    <label for="malt-weight">Malt Weight:</label>
+    <input type="text" id="malt-weight" name="malt-weight"><br>
+    <button type="button" id="add-malt-button">Add Malt</button>
+        <div id="malt-list">
+      <h3>Malt List</h3>
+      <ul id="malt-items"></ul>
+    </div>
+    
+    
+        
+        <label for="hop-variety">Hop Variety:</label>
+        <select id="hop-variety" name="hop-variety">
+          <option value="cascade">Cascade</option>
+          <option value="centennial">Centennial</option>
+          <option value="amarillo">Amarillo</option>
+          <option value="simcoe">Simcoe</option>
+          <option value="nugget">Nugget</option>
+        </select><br>
+    
+        <label for="hop-weight">Hop Weight:</label>
+        <input type="text" id="hop-weight" name="hop-weight"><br>
+       
+            <label for="alpha-acid">Alpha Acid:</label>
+        <input type="text" id="alpha-acid" name="alpha-acid" placeholder="% AA"><br>
+        <button type="button" id="add-hop-button">Add Hop</button>
+        <div id="hop-list"></div>
+        <button id="add-recipe-button" type="submit">Add Recipe</button>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>
